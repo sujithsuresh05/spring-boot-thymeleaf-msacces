@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BankController {
 
     @GetMapping("/dashboard")
-    public String login(Model model) {
-        return "dashboard";
+    public String home(Model model) {
+        return "/dashboard";
     }
 }

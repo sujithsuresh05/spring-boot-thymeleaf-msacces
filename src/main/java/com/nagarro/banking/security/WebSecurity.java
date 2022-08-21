@@ -44,10 +44,11 @@ public class WebSecurity {
                         .permitAll()
                 ).userDetailsService(users())
                 .logout(logout -> {
-                    logout.deleteCookies("JSESSIONID")
+                    logout.logoutUrl("/logout")
+                            .deleteCookies("JSESSIONID")
                             .logoutSuccessUrl("/login").permitAll();
                 })
-                .sessionManagement( session -> {
+                .sessionManagement(session -> {
                     session.maximumSessions(1)
                             .maxSessionsPreventsLogin(true)
                             .and()
