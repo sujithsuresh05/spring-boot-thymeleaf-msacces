@@ -17,4 +17,6 @@ public class Constants {
 	public static final String START_AMOUNT_GREATER_THAN_END_AMOUNT = "Start amount must be less than than end amount";
 	
 	public static final String SEARCH_AUTHORIZATION_ERROR = "You are not authorized to search with parameter ...!";
+
+	public static final String UI_DATE_FORMAT = "dd.MM.yyyy";
 }

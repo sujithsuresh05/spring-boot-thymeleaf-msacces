@@ -13,11 +13,11 @@ public class Utils {
 		return doubleValue;
 	}
 
-	public static Date getDate(String textDate) {
-		SimpleDateFormat frmt = new SimpleDateFormat("yyyy-MM-dd");
+	public static Date getDate(String textDate, String pattern) {
+		SimpleDateFormat format = new SimpleDateFormat(pattern == null ? "yyyy-MM-dd" : pattern);
 		Date date = null;
 		try {
-			date = frmt.parse(textDate);
+			date = format.parse(textDate);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
