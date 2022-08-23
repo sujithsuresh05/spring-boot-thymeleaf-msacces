@@ -17,4 +17,16 @@ public class Constants {
 	public static final String START_AMOUNT_GREATER_THAN_END_AMOUNT = "Start amount must be less than than end amount";
 	
 	public static final String SEARCH_AUTHORIZATION_ERROR = "You are not authorized to search with parameter ...!";
+
+	public static final String GLOBAL_ERROR_NAME = "global_error";
+
+	public static final String INVALID_ACCOUNT_ERROR_MSG = "Provided Account Id is Invalid";
+
+	public static final String UI_DATE_FORMAT = "dd.MM.yyyy";
+
+	public static final String DEFAULT_ERROR_VIEW = "error";
+
+	public static final String VALID_USER_ERROR_VIEW = "valid_user_error";
+
+	public static final String LANDING_PAGE = "/bank/dashboard";
 }

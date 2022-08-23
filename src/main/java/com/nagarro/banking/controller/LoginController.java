@@ -21,4 +21,10 @@ public class LoginController {
         return "login";
     }
 
+    @RequestMapping("/login-session-invalid")
+    public String loginSessionInvalid(Model model) {
+        model.addAttribute("loginSessionInvalid", true);
+        return "login";
+    }
+
 }

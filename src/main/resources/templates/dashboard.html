@@ -1,55 +1,79 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
+
+    <link rel="stylesheet"
+          href=
+                  "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet"
+          href=
+                  "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css"/>
+    <link rel="stylesheet"
+          href=
+                  "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <script src=
+                    "https://code.jquery.com/jquery-3.3.1.slim.min.js">
+    </script>
+    <script src=
+                    "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+    </script>
+    <script src=
+                    "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
+    </script>
     <title>Home</title>
 </head>
 <body>
-<nav class="navbar navbar-expand navbar-dark bg-dark">
+<div>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" style="background-color: #31B0D5; color: aliceblue;
+        padding: 10px 20px;border-radius: 4px;border-color: #46b8da;
+        position: fixed;top: 30px;right: 20px;">
+            LOGOUT
+        </button>
+    </form>
+</div>
+<div class="container top-toolbar" style="top: 30px;">
+    <form role="search" th:action="@{/bank/statementsearch}"
+          th:object="${searchcriteria}" method="post">
+        <div class="form-group-stylish row">
+            <div class="col-sm-2" sec:authorize="hasRole('USER')">
+                <label>Account Id:</label>
+                <input type="number" id="account_id" class="form-control" th:field="*{accountId}"
+                       placeholder="Account Id"/>
+            </div>
+            <div class="col-sm-2" sec:authorize="hasRole('ADMIN')">
+                <label>Date From:</label>
+                <input type="text" id="start_date" th:field="*{startDate}" placeholder="yyyy-MM-dd"/>
+            </div>
+            <div class="col-sm-2" sec:authorize="hasRole('ADMIN')">
+                <label>Date To:</label>
+                <input type="text" id="end_date" th:field="*{endDate}" placeholder="yyyy-MM-dd"/>
+            </div>
+            <div class="col-sm-2" sec:authorize="hasRole('ADMIN')">
+                <label>Amount from:</label>
+                <input type="number" id="amount_from" th:field="*{amountFrom}" placeholder="Amount from:"/>
+            </div>
+            <div class="col-sm-2" sec:authorize="hasRole('ADMIN')">
+                <label>Amount to:</label>
+                <input type="number" id="amount_to" th:field="*{amountTo}" placeholder="Amount to:"/>
+            </div>
+        </div>
+        <div class="form-group-stylish row" style="margin-top: 20px;">
+            <div class="col-sm-5 ">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
 
-</nav>
-
-<div class="container" style="max-width: 850px; margin-top: 300px; align-content: center">
-    <div  >
-        <table style="float: left;width: inherit;">
-            <tr>
-                <td>
-                    <div class="col-sm">
-
-                    </div>
-                </td>
-                <td>
-                    <div class="col-sm">
-
-                    </div>
-                </td>
-                <td>
-                    <div class="col-sm">
-                        <form class="form-inline my-2 my-md-0" th:action="@{/bank/statementsearch}" th:object="${searchcriteria}" method="post">
-                            <div class="form-outline mb-4" style="margin: 2px; max-width: 20px">
-                                <input type="text" id="account_id" class="form-control" th:field="*{accountId}" placeholder="Account Id"  />
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-block" style="margin: 2px; max-width: 200px">Search
-                            </button>
-                        </form>
-                    </div>
-                </td>
-                <td>
-                    <div class="col-sm">
-                        <form th:action="@{/logout}" method="post">
-                            <button type="submit" class="btn btn-primary btn-block" style="margin: 2px; max-width: 200px">LOGOUT
-                            </button>
-                        </form>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <table class="table table-hover">
+<div class="container " style="margin-top: 100px; align-content: center">
+    <table class="table table-hover" th:if="${search_results}">
         <thead>
         <tr>
             <th scope="col">Id</th>
@@ -61,14 +85,15 @@
         <tbody th:each="searchresult : ${search_results}">
 
         <tr>
-            <td th:text="${searchresult.getAccountId()}" />
-            <td th:text="${searchresult.getAccountNumber()}" />
-            <td th:text="${searchresult.getAmount()}" />
-            <td th:text="${searchresult.getDate()}" />
+            <td th:text="${searchresult.getAccountId()}"/>
+            <td th:text="${searchresult.getAccountNumber()}"/>
+            <td th:text="${searchresult.getAmount()}"/>
+            <td th:text="${searchresult.getDate()}"/>
         </tr>
 
         </tbody>
     </table>
 </div>
+
 </body>
 </html>

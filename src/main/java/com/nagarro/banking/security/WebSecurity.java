@@ -31,7 +31,7 @@ public class WebSecurity {
 
         http
                 .authorizeRequests((authorize) -> authorize
-                        .antMatchers("/css/**", "/index").permitAll()
+                        .antMatchers("/css/**").permitAll()
                         .antMatchers("/bank/**").hasRole("USER")
                 )
                 .formLogin((formLogin) -> formLogin
@@ -46,14 +46,15 @@ public class WebSecurity {
                 .logout(logout -> {
                     logout.logoutUrl("/logout")
                             .deleteCookies("JSESSIONID")
+                            .invalidateHttpSession(true)
                             .logoutSuccessUrl("/login").permitAll();
                 })
                 .sessionManagement(session -> {
                     session.maximumSessions(1)
                             .maxSessionsPreventsLogin(true)
                             .and()
-                            .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                            .invalidSessionUrl("/invalidSession.html");
+                            .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                            .invalidSessionUrl("/login-session-invalid");
                 });
 
         return http.build();
@@ -89,8 +90,10 @@ public class WebSecurity {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
 
 }
