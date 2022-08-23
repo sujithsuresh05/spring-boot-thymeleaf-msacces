@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface BankService {
 
-    public List<SearchResult> searchStatement(SearchCriteriaRequestModel searchCriteriaRequestModel);
+     List<SearchResult> searchStatement( SearchCriteriaRequestModel searchCriteriaRequestModel);
 
 }

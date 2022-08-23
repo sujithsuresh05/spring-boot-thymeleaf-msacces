@@ -41,6 +41,11 @@
 <div class="container top-toolbar" style="top: 30px;">
     <form role="search" th:action="@{/bank/statementsearch}"
           th:object="${searchcriteria}" method="post">
+        <div th:if="${#fields.hasAnyErrors()}">
+            <ul>
+                <li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+            </ul>
+        </div>
         <div class="form-group-stylish row">
             <div class="col-sm-2" sec:authorize="hasRole('USER')">
                 <label>Account Id:</label>
@@ -49,11 +54,11 @@
             </div>
             <div class="col-sm-2" sec:authorize="hasRole('ADMIN')">
                 <label>Date From:</label>
-                <input type="text" id="start_date" th:field="*{startDate}" placeholder="yyyy-MM-dd"/>
+                <input type="text" id="start_date" th:field="*{startDate}" placeholder="dd.MM.yyyy"/>
             </div>
             <div class="col-sm-2" sec:authorize="hasRole('ADMIN')">
                 <label>Date To:</label>
-                <input type="text" id="end_date" th:field="*{endDate}" placeholder="yyyy-MM-dd"/>
+                <input type="text" id="end_date" th:field="*{endDate}" placeholder="dd.MM.yyyy"/>
             </div>
             <div class="col-sm-2" sec:authorize="hasRole('ADMIN')">
                 <label>Amount from:</label>

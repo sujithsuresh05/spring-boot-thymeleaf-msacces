@@ -26,17 +26,13 @@ class MsaccesApplicationTests {
 	private MockMvc mockMvc;
 
 	@Test
-	void contextLoads() {
-	}
-
-	@Test
-	public void accessUnprotected() throws Exception {
+	 void accessUnprotected() throws Exception {
 		this.mockMvc.perform(get("/login"))
 				.andExpect(status().isOk());
 	}
 
 	@Test
-	public void loginUser() throws Exception {
+	 void loginUser() throws Exception {
 		// @formatter:off
 		this.mockMvc.perform(formLogin().user("admin").password("admin"))
 				.andExpect(authenticated());
@@ -44,7 +40,7 @@ class MsaccesApplicationTests {
 	}
 
 	@Test
-	public void accessProtectedRedirectsToLogin() throws Exception {
+	 void accessProtectedRedirectsToLogin() throws Exception {
 
 		MvcResult mvcResult = this.mockMvc.perform(get("/bank/dashborad"))
 				.andExpect(status().is3xxRedirection())
@@ -54,7 +50,7 @@ class MsaccesApplicationTests {
 	}
 
 	@Test
-	public void loginInvalidUser() throws Exception {
+	 void loginInvalidUser() throws Exception {
 		// @formatter:off
 		this.mockMvc.perform(formLogin().user("invalid").password("invalid"))
 				.andExpect(unauthenticated())
@@ -63,7 +59,7 @@ class MsaccesApplicationTests {
 	}
 
 	@Test
-	public void loginUserAccessProtected() throws Exception {
+	 void loginUserAccessProtected() throws Exception {
 		// @formatter:off
 		MvcResult mvcResult = this.mockMvc.perform(formLogin().user("user").password("user"))
 				.andExpect(authenticated()).andReturn();

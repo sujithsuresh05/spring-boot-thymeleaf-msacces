@@ -1,7 +1,8 @@
 package com.nagarro.banking.utils;
 
-public class Constants {
+public final class Constants {
 
+	public static final String SEARCH_CRITERIA_VALIDATOR_QUALIFIER_NAME = "searchFormValidator";
 	public static final String ERROR_LOGIN = "Invalid Username or Password";
 	
 	public static final String BAD_CREDENTIAL = "Bad Credential";
@@ -12,7 +13,9 @@ public class Constants {
 	
 	public static final String NEGATE_AMOUNT_ERROR = "Amount can't be negative";
 
-	public static final String FROM_DATE_LESS_THAN_TO_DATE_ERROR = "To date must be greater than from date";
+	public static final String FROM_DATE_GREATER_THAN_TO_DATE_ERROR = "To date must be greater than from date";
+
+	public static final String FROM_DATE_TO_DATE_NULL_ERROR = "To date and from date can not be null";
 	
 	public static final String START_AMOUNT_GREATER_THAN_END_AMOUNT = "Start amount must be less than than end amount";
 	
@@ -29,4 +32,8 @@ public class Constants {
 	public static final String VALID_USER_ERROR_VIEW = "valid_user_error";
 
 	public static final String LANDING_PAGE = "/bank/dashboard";
+
+	private Constants() {
+
+	}
 }
