@@ -11,6 +11,7 @@ import com.nagarro.banking.dto.SearchCriteriaDto;
 import com.nagarro.banking.dto.StatementDto;
 import com.nagarro.banking.entity.Account;
 import com.nagarro.banking.entity.Statement;
+import com.nagarro.banking.exception.InvalidAccountException;
 import com.nagarro.banking.model.SearchCriteriaRequestModel;
 import com.nagarro.banking.model.SearchResult;
 import com.nagarro.banking.repository.AccountRepository;
@@ -43,7 +44,11 @@ public class BankServiceImpl implements BankService {
     @Override
     public List<SearchResult> searchStatement(SearchCriteriaRequestModel searchCriteriaRequestModel) {
 
-        //Optional<Account> accountOptional = accountRepository.findById(1L);
+        Long accountId = new Double(searchCriteriaRequestModel.getAccountId()).longValue();
+        Optional<Account> accountOptional = accountRepository.findById(accountId);
+        if (!accountOptional.isPresent())
+            throw new InvalidAccountException(accountId, Constants.INVALID_ACCOUNT_ERROR_MSG);
+
         searchCriteriaRequestModel = new SearchCriteriaRequestModel("1", "15.09.2010",
                 "15.09.2019", "100", "20000");
         Converter<SearchCriteriaDto, SearchCriteriaRequestModel> converterCriteria = new SearchCriteriaConverter();
@@ -57,14 +62,14 @@ public class BankServiceImpl implements BankService {
 
         searchFilterList.add(new SearchDateFilter(searchCriteriaDto));
         searchFilterList.add(new SearchAmountFilter(searchCriteriaDto));
-        List<StatementDto> statementDtoList1 = statementDtoList.stream().filter( dto -> {
+        List<StatementDto> statementDtoList1 = statementDtoList.stream().filter(dto -> {
             return searchChainingFilter.applyFilter(searchFilterList, dto);
         }).collect(Collectors.toList());
 
-        List<SearchResult> list = statementDtoList1.stream().map( dto -> {
-             return SearchResult.of(Integer.toString(dto.getAccountId()),
-                     dto.getAccountNumberIdHashed(), dto.getTransactionDate().toString(), Double.toString(dto.getAmount()));
-         }).collect(Collectors.toList());
+        List<SearchResult> list = statementDtoList1.stream().map(dto -> {
+            return SearchResult.of(Integer.toString(dto.getAccountId()),
+                    dto.getAccountNumberIdHashed(), dto.getTransactionDate().toString(), Double.toString(dto.getAmount()));
+        }).collect(Collectors.toList());
         return list;
     }
 }

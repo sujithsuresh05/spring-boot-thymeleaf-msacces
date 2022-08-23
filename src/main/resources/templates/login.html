@@ -12,10 +12,10 @@
 
 
 <div  class="container" style="max-width: 850px; margin-top: 300px; align-content: center">
-    <div th:if="${loginError}">
-        Invalid username and password.</div>
-    <div th:if="${loggedOut}">
-        You have been logged out.</div>
+    <div class="alert alert-danger" role="alert" th:if="${loginError}">
+        Invalid credential or Multiple login Session found</div>
+    <div class="alert alert-warning" role="alert" th:if="${loginSessionInvalid}">
+        You have been logged out or session expired.</div>
     <form th:action="@{/login}" method="post">
         <!-- Email input -->
         <div class="form-outline mb-4" style="margin: 2px; max-width: 600px">
@@ -27,16 +27,7 @@
             <input type="password" id="form1Example2" class="form-control" placeholder="Password" name="password"/>
         </div>
 
-        <!-- 2 column grid layout for inline styling -->
-        <div class="row mb-4" style="margin: 2px; max-width: 600px">
-            <div class="col d-flex justify-content-center">
-                <!-- Checkbox -->
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
-                    <label class="form-check-label" for="form1Example3"> Remember me </label>
-                </div>
-            </div>
-        </div>
+
 
         <!-- Submit button -->
         <button type="submit" class="btn btn-primary btn-block" style="margin: 2px; max-width: 600px">Sign in</button>
