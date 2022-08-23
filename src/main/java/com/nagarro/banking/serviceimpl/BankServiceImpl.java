@@ -22,6 +22,7 @@ import com.nagarro.banking.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class BankServiceImpl implements BankService {
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public List<SearchResult> searchStatement(SearchCriteriaRequestModel searchCriteriaRequestModel) {
+    public List<SearchResult> searchStatement( SearchCriteriaRequestModel searchCriteriaRequestModel) {
 
         Long accountId = new Double(searchCriteriaRequestModel.getAccountId()).longValue();
         Optional<Account> accountOptional = accountRepository.findById(accountId);

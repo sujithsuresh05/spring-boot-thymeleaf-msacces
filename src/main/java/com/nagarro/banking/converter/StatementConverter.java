@@ -22,6 +22,6 @@ public class StatementConverter extends Converter<StatementDto, Statement> {
 
     private static Statement convertToEntity(StatementDto dto) {
         return new Statement(dto.getAccountId().longValue(), new Integer(dto.getAccountNumber()).toString(),
-                dto.getTransactionDate().toString(), new Double(dto.getAmount()).toString());
+                dto.getTransactionDate().toString(), Double.toString(dto.getAmount()));
     }
 }

@@ -1,12 +1,14 @@
 package com.nagarro.banking.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
 @AllArgsConstructor(staticName = "of")
+@Builder
 public class StatementDto {
 
     private Integer accountId;
