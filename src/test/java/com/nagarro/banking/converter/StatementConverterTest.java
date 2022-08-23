@@ -14,12 +14,12 @@ import static org.apache.commons.lang3.time.DateUtils.parseDate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-public class StatementConverterTest {
+class StatementConverterTest {
 
     @Test
     void convertToDto_returnStatementDto() throws ParseException {
         Date date = parseDate("22.02.2021", "dd.MM.yyyy");
-        StatementDto statementDto = StatementDto.of(1, "$2a$10$zwdV6sUKZ5/eD/OaCu.JbOysDYdBb3U0eQiPMqBbWCKHAXoUQnCCS", "123", date, Double.parseDouble("100"));
+        StatementDto statementDto = StatementDto.of(1, "$2a$10$zwdV6sUKZ5/eD/OaCu.JbOysDYdBb3U0eQiPMqBbWCKHAXoUQnCCS", "123", date, Double.parseDouble("100"), "22.02.2021");
         Statement expected = Statement.builder().id(1L).accountId("123").amount("100.0").dateField("Mon Feb 22 00:00:00 IST 2021").build();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         Converter<StatementDto, Statement> converter = new StatementConverter(passwordEncoder);
@@ -30,7 +30,7 @@ public class StatementConverterTest {
     @Test
     void convertFromEntity_returnStatementDto() throws ParseException {
         Date date = parseDate("22.02.2021", "dd.MM.yyyy");
-        StatementDto expected = StatementDto.of(1, null, "123", date, Double.parseDouble("100"));
+        StatementDto expected = StatementDto.of(1, null, "123", date, Double.parseDouble("100"), "22.02.2021");
         Statement statement = Statement.builder().id(1L).accountId("123").amount("100.0").dateField("22.02.2021").build();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         Converter<StatementDto, Statement> converter = new StatementConverter(passwordEncoder);

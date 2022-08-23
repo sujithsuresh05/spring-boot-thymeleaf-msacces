@@ -21,5 +21,7 @@ public class StatementDto {
 
     private Double amount;
 
+    private String transactionDateText;
+
 
 }

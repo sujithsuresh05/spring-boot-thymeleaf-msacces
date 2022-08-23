@@ -1,6 +1,9 @@
 package com.nagarro.banking.utils;
 
-public class LogTextConstants {
+public final class LogTextConstants {
+
+    private LogTextConstants() {
+    }
 
     public static final String BANK_CONTROLLER_GET_HOME_INFO = "Returned dashbording landing page";
 

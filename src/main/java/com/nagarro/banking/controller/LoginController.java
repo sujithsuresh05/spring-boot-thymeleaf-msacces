@@ -1,30 +1,29 @@
 package com.nagarro.banking.controller;
 
+import com.nagarro.banking.utils.ModelAtributeConstant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class LoginController {
 
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String loginLandingPage(Model model) {
-        return "login";
+        return ModelAtributeConstant.LOGIN_VIEW;
     }
 
-    @RequestMapping("/login-error")
+    @GetMapping("/login-error")
     public String loginError(Model model) {
-        model.addAttribute("loginError", true);
-        return "login";
+        model.addAttribute(ModelAtributeConstant.LOGIN_ERROR, true);
+        return ModelAtributeConstant.LOGIN_VIEW;
     }
 
-    @RequestMapping("/login-session-invalid")
+    @GetMapping("/login-session-invalid")
     public String loginSessionInvalid(Model model) {
-        model.addAttribute("loginSessionInvalid", true);
-        return "login";
+        model.addAttribute(ModelAtributeConstant.LOGIN_SESSION_INVALID, true);
+        return ModelAtributeConstant.LOGIN_VIEW;
     }
 
 }

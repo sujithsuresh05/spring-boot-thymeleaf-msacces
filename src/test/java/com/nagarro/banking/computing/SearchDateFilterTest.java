@@ -13,14 +13,14 @@ import static org.apache.commons.lang3.time.DateUtils.parseDate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-public class SearchDateFilterTest {
+class SearchDateFilterTest {
 
     @Test
     void filter_returnTrue() throws ParseException {
         Date date = parseDate("22.02.2021", "dd.MM.yyyy");
         Date startDate = parseDate("21.02.2021", "dd.MM.yyyy");
         Date endDate = parseDate("25.02.2021", "dd.MM.yyyy");
-        StatementDto statementDto = StatementDto.of(1, null, "123", date, Double.parseDouble("500"));
+        StatementDto statementDto = StatementDto.of(1, null, "123", date, Double.parseDouble("500"), "22.02.2021");
         SearchCriteriaDto searchCriteriaDto = SearchCriteriaDto.of(1, startDate, endDate, Double.parseDouble("100"), Double.parseDouble("1000"));
         SearchDateFilter searchDateFilter = new SearchDateFilter(searchCriteriaDto);
         boolean result = searchDateFilter.filter(statementDto);

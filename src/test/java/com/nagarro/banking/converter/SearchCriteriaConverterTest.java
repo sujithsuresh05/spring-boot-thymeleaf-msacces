@@ -9,7 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-public class SearchCriteriaConverterTest {
+class SearchCriteriaConverterTest {
 
     @Test
     void convertToDto_returnSearchCriteriaDto() {

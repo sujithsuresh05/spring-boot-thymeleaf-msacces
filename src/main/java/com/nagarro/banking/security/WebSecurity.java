@@ -11,14 +11,12 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
-import static org.springframework.security.config.Customizer.withDefaults;
 
 
 @Configuration
@@ -30,11 +28,11 @@ public class WebSecurity {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-                .authorizeRequests((authorize) -> authorize
+                .authorizeRequests( authorize -> authorize
                         .antMatchers("/css/**").permitAll()
                         .antMatchers("/bank/**").hasRole("USER")
                 )
-                .formLogin((formLogin) -> formLogin
+                .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .failureUrl("/login-error")
                         .successHandler(successHandler())
@@ -43,19 +41,19 @@ public class WebSecurity {
                         .defaultSuccessUrl("/bank/dashboard")
                         .permitAll()
                 ).userDetailsService(users())
-                .logout(logout -> {
+                .logout(logout ->
                     logout.logoutUrl("/logout")
                             .deleteCookies("JSESSIONID")
                             .invalidateHttpSession(true)
-                            .logoutSuccessUrl("/login").permitAll();
-                })
-                .sessionManagement(session -> {
+                            .logoutSuccessUrl("/login").permitAll()
+                )
+                .sessionManagement(session ->
                     session.maximumSessions(1)
                             .maxSessionsPreventsLogin(true)
                             .and()
                             .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                            .invalidSessionUrl("/login-session-invalid");
-                });
+                            .invalidSessionUrl("/login-session-invalid")
+                );
 
         return http.build();
     }

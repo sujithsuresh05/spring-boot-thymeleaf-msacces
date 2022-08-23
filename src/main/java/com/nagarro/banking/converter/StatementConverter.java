@@ -5,8 +5,6 @@ import com.nagarro.banking.entity.Statement;
 import com.nagarro.banking.utils.Utils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.function.Function;
-
 public class StatementConverter extends Converter<StatementDto, Statement> {
     private static BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -17,7 +15,7 @@ public class StatementConverter extends Converter<StatementDto, Statement> {
 
     private static StatementDto convertToDto(Statement statement) {
         return StatementDto.of( statement.getId().intValue(), bCryptPasswordEncoder.encode(statement.getAccountId()),
-                statement.getAccountId(), Utils.getDate(statement.getDateField(), "dd.MM.yyyy"), Double.parseDouble(statement.getAmount()));
+                statement.getAccountId(), Utils.getDate(statement.getDateField(), "dd.MM.yyyy"), Double.parseDouble(statement.getAmount()), statement.getDateField());
     }
 
     private static Statement convertToEntity(StatementDto dto) {

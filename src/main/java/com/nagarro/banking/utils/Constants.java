@@ -15,7 +15,7 @@ public final class Constants {
 
 	public static final String FROM_DATE_GREATER_THAN_TO_DATE_ERROR = "To date must be greater than from date";
 
-	public static final String FROM_DATE_TO_DATE_NULL_ERROR = "To date and from date cann't be null";
+	public static final String FROM_DATE_TO_DATE_NULL_ERROR = "To date and from date can not be null";
 	
 	public static final String START_AMOUNT_GREATER_THAN_END_AMOUNT = "Start amount must be less than than end amount";
 	

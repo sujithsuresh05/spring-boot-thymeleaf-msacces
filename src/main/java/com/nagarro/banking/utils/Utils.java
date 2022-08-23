@@ -1,16 +1,20 @@
 package com.nagarro.banking.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Slf4j
 public class Utils {
 
+	private Utils() {
+	}
+
 	public static Double getDouble(String value) {
-		Double doubleValue = StringUtils.isNotEmpty(value) ? Double.parseDouble(value) : 0;
-		return doubleValue;
+		return StringUtils.isNotEmpty(value) ? Double.parseDouble(value) : 0;
 	}
 
 	public static Date getDate(String textDate, String pattern) {
@@ -19,7 +23,7 @@ public class Utils {
 		try {
 			date = format.parse(textDate);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		return date;
 	}

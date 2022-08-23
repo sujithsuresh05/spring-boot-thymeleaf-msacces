@@ -45,7 +45,7 @@ public class SearchFormValidator implements Validator {
 							Constants.FROM_DATE_GREATER_THAN_TO_DATE_ERROR);
 				}
 			}
-			else if (start == null || end == null) {
+			else if ((start == null || end == null) && (start != null || end != null)) {
 				errors.rejectValue("startDate", "dateSelction", new Object[] { "'startDate'" },
 						Constants.FROM_DATE_TO_DATE_NULL_ERROR);
 			}

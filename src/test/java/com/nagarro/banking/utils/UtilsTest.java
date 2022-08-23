@@ -11,7 +11,7 @@ import static org.apache.commons.lang3.time.DateUtils.parseDate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-public class UtilsTest {
+class UtilsTest {
 
     @Test
     void getDate_withStringDateAndPattern_returnDate() throws ParseException {

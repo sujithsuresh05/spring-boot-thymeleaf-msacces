@@ -2,10 +2,7 @@ package com.nagarro.banking.computing;
 
 import com.nagarro.banking.dto.SearchCriteriaDto;
 import com.nagarro.banking.dto.StatementDto;
-import com.nagarro.banking.security.IsAdmin;
 import org.springframework.security.access.prepost.PreAuthorize;
-
-import java.util.Date;
 
 @PreAuthorize("hasRole('ADMIN')")
 public class SearchDateFilter implements SearchFilter {

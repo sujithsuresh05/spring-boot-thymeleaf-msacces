@@ -49,7 +49,7 @@ public class BankController {
         return ModelAtributeConstant.DASHBOARD_URL;
     }
 
-    @RequestMapping(value = ModelAtributeConstant.SEARCH_PATH, method = RequestMethod.POST)
+    @PostMapping(value = ModelAtributeConstant.SEARCH_PATH)
     public String search(HttpServletRequest request, HttpServletResponse response,
                          @ModelAttribute(ModelAtributeConstant.SEARCH_CRITERIA_ATRIBUTE) @Validated SearchCriteriaRequestModel searchCriteriaRequestModel,
                          BindingResult bindingResult, Model model) {
@@ -57,10 +57,10 @@ public class BankController {
         List<SearchResult> res = bankService.searchStatement(searchCriteriaRequestModel);
         if (bindingResult.hasErrors()) {
             logger.info(LogTextConstants.BANK_CONTROLLER_POST_METHOD_VALIDATION_FAIL_INFO);
-            return ModelAtributeConstant.DASHBOARD_URL;
+        } else {
+            model.addAttribute(ModelAtributeConstant.SEARCH_RESULTS, res);
+            logger.info(LogTextConstants.BANK_CONTROLLER_POST_SEARCH_INFO);
         }
-        model.addAttribute(ModelAtributeConstant.SEARCH_RESULTS, res);
-        logger.info(LogTextConstants.BANK_CONTROLLER_POST_SEARCH_INFO);
         return ModelAtributeConstant.DASHBOARD_URL;
     }
 }
